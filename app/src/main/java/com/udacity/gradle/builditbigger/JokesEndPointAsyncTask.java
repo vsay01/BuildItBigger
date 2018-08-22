@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.util.Pair;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -13,12 +12,14 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class JokesEndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+import app.udacity.jokeactivity.MainActivity;
+
+public class JokesEndPointAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Context... params) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -32,7 +33,7 @@ public class JokesEndPointAsyncTask extends AsyncTask<Pair<Context, String>, Voi
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
                     });
-            context = params[0].first;
+            context = params[0];
             // end options for devappserver
 
             myApiService = builder.build();
@@ -47,7 +48,7 @@ public class JokesEndPointAsyncTask extends AsyncTask<Pair<Context, String>, Voi
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, app.udacity.jokeactivity.MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("JOKE_EXTRA", result);
         context.startActivity(intent);
     }

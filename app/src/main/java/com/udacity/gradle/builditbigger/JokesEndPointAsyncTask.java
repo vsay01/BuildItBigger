@@ -14,12 +14,16 @@ import java.io.IOException;
 
 import app.udacity.jokeactivity.MainActivity;
 
-public class JokesEndPointAsyncTask extends AsyncTask<Context, Void, String> {
+public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
+    public JokesEndPointAsyncTask(Context context) {
+        this.context = context;
+    }
+
     @Override
-    protected String doInBackground(Context... params) {
+    protected String doInBackground(Void... voids) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -33,7 +37,6 @@ public class JokesEndPointAsyncTask extends AsyncTask<Context, Void, String> {
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
                     });
-            context = params[0];
             // end options for devappserver
 
             myApiService = builder.build();
@@ -48,8 +51,10 @@ public class JokesEndPointAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra("JOKE_EXTRA", result);
-        context.startActivity(intent);
+        if (context != null) {
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra("JOKE_EXTRA", result);
+            context.startActivity(intent);
+        }
     }
 }

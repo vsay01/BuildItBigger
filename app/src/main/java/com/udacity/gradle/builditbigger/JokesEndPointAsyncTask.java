@@ -12,9 +12,12 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
+import static app.udacity.jokeactivity.MainActivity.JOKE_EXTRA_KEY;
+
 public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private JokeListener jokeListener;
 
     public JokesEndPointAsyncTask(Context context) {
         this.context = context;
@@ -43,17 +46,27 @@ public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
         try {
             return myApiService.getJoke().execute().getJokeDetail();
         } catch (IOException e) {
+            if (jokeListener != null) {
+                jokeListener.onError("");
+            }
             return e.getMessage();
         }
     }
 
     @Override
     protected void onPostExecute(final String result) {
+        if (jokeListener != null) {
+            jokeListener.onResult(result);
+        }
         if (context != null) {
             ((MainActivityFragment) ((MainActivity) context).getSupportFragmentManager().findFragmentById(R.id.fragment)).stopProgressBar();
             Intent intent = new Intent(context, app.udacity.jokeactivity.MainActivity.class);
-            intent.putExtra("JOKE_EXTRA", result);
+            intent.putExtra(JOKE_EXTRA_KEY, result);
             context.startActivity(intent);
         }
+    }
+
+    public void setJokeListener(JokeListener jokeListener) {
+        this.jokeListener = jokeListener;
     }
 }

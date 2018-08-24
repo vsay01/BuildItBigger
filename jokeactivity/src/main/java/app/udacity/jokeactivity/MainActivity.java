@@ -8,6 +8,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String JOKE_EXTRA_KEY = "JOKE_EXTRA_KEY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            tvJokeDetail.setText(bundle.getString("JOKE_EXTRA"));
+            tvJokeDetail.setText(bundle.getString(JOKE_EXTRA_KEY));
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

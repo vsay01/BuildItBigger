@@ -44,7 +44,7 @@ public class MainActivityFragment extends Fragment {
 
         progressBar = root.findViewById(R.id.progress_bar);
         mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         button = root.findViewById(R.id.button_tell_joke);

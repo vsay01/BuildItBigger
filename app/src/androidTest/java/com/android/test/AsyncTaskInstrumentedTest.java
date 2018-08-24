@@ -1,20 +1,22 @@
 package com.android.test;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.udacity.gradle.builditbigger.JokeListener;
 import com.udacity.gradle.builditbigger.JokesEndPointAsyncTask;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.CountDownLatch;
 
 import app.udacity.jokeactivity.MainActivity;
+
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -29,10 +31,27 @@ public class AsyncTaskInstrumentedTest {
             false);   // launchActivity. False to customize the intent
 
     @Test
-    public void testAsyncTaskReturnNonEmptyString() throws InterruptedException, ExecutionException, TimeoutException {
-        JokesEndPointAsyncTask jokesEndPointAsyncTask = new JokesEndPointAsyncTask(activityRule.getActivity());
-        jokesEndPointAsyncTask.execute();
-        String joke = jokesEndPointAsyncTask.get(5, TimeUnit.SECONDS);
-        Assert.assertNotEquals(0, joke.length());
+    public void testAsyncTaskReturnNonEmptyString() {
+        final CountDownLatch signal = new CountDownLatch(1);
+        try {
+            JokesEndPointAsyncTask jokesEndPointAsyncTask = new JokesEndPointAsyncTask(activityRule.getActivity());
+            jokesEndPointAsyncTask.setJokeListener(new JokeListener() {
+                @Override
+                public void onResult(String joke) {
+                    assertTrue(joke.length() > 0);
+                    signal.countDown();
+                }
+
+                @Override
+                public void onError(String error) {
+                    assertFalse(error.length() > 0);
+                    signal.countDown();
+                }
+            });
+            jokesEndPointAsyncTask.execute();
+            signal.await();
+        } catch (InterruptedException e) {
+
+        }
     }
 }

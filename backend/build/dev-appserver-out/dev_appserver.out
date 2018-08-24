@@ -1,18 +1,25 @@
+objc[13850]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java (0x10cefd4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10cfc54e0). One of the two will be used. Which one is undefined.
 Warning: Google App Engine Java 7 runtime is deprecated.
 Warning: See https://cloud.google.com/appengine/docs/deprecations/java7
-java.lang.RuntimeException: Unable to create a DevAppServer
-	at com.google.appengine.tools.development.DevAppServerFactory.doCreateDevAppServer(DevAppServerFactory.java:401)
-	at com.google.appengine.tools.development.DevAppServerFactory.access$000(DevAppServerFactory.java:31)
-	at com.google.appengine.tools.development.DevAppServerFactory$1.run(DevAppServerFactory.java:318)
-	at com.google.appengine.tools.development.DevAppServerFactory$1.run(DevAppServerFactory.java:315)
-	at java.base/java.security.AccessController.doPrivileged(Native Method)
-	at com.google.appengine.tools.development.DevAppServerFactory.createDevAppServer(DevAppServerFactory.java:314)
-	at com.google.appengine.tools.development.DevAppServerMain$StartAction.apply(DevAppServerMain.java:374)
-	at com.google.appengine.tools.util.Parser$ParseResult.applyArgs(Parser.java:45)
-	at com.google.appengine.tools.development.DevAppServerMain.run(DevAppServerMain.java:247)
-	at com.google.appengine.tools.development.DevAppServerMain.main(DevAppServerMain.java:238)
-Caused by: java.lang.ClassCastException: ClassLoader is jdk.internal.loader.ClassLoaders$AppClassLoader@4459eb14, not a URLClassLoader.
-	at com.google.apphosting.utils.security.SecurityManagerInstaller.generatePolicyFile(SecurityManagerInstaller.java:139)
-	at com.google.apphosting.utils.security.SecurityManagerInstaller.install(SecurityManagerInstaller.java:94)
-	at com.google.appengine.tools.development.DevAppServerFactory.doCreateDevAppServer(DevAppServerFactory.java:377)
-	... 9 more
+Aug 24, 2018 8:41:42 AM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
+INFO: Overwriting system property key 'java.util.logging.config.file', value '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/config/sdk/logging.properties' with value 'WEB-INF/logging.properties' from '/Users/vortana_say/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend/WEB-INF/appengine-web.xml'
+Aug 24, 2018 8:41:42 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Logging to JettyLogger(null) via com.google.apphosting.utils.jetty.JettyLogger
+Aug 24, 2018 8:41:43 AM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
+WARNING: Your working directory, (/Users/vortana_say/AndroidStudioProjects/BuildItBigger) is not equal to your 
+web application root (/Users/vortana_say/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend)
+You will not be able to access files from your working directory on the production server.
+
+Aug 24, 2018 8:41:43 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: jetty-6.1.x
+Aug 24, 2018 8:41:45 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Started SelectChannelConnector@localhost:8080
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: Module instance default is running at http://localhost:8080/
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: The admin console is running at http://localhost:8080/_ah/admin
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.DevAppServerImpl doStart
+INFO: Dev App Server is now running
+Aug 24, 2018 8:42:57 AM com.google.appengine.tools.development.AbstractModule shutdown
+Shutting down.
+INFO: Shutting down module instance default

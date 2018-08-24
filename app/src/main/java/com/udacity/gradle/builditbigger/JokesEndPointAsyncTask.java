@@ -50,7 +50,7 @@ public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(final String result) {
         if (context != null) {
-            ((com.udacity.gradle.builditbigger.MainActivity) context).stopProgressBar();
+            ((MainActivityFragment) ((MainActivity) context).getSupportFragmentManager().findFragmentById(R.id.fragment)).stopProgressBar();
             Intent intent = new Intent(context, app.udacity.jokeactivity.MainActivity.class);
             intent.putExtra("JOKE_EXTRA", result);
             context.startActivity(intent);

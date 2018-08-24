@@ -7,16 +7,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         progressBar = findViewById(R.id.progress_bar);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
@@ -43,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
         startProgressBar();
-        new JokesEndPointAsyncTask(this).execute();
+        new JokesEndPointAsyncTask(this, mInterstitialAd).execute();
     }
 
     public void startProgressBar() {

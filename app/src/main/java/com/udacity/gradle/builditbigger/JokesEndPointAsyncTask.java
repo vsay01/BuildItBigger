@@ -23,11 +23,9 @@ public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
     private Context context;
     private InterstitialAd mInterstitialAd;
 
-    public JokesEndPointAsyncTask(Context context) {
+    public JokesEndPointAsyncTask(Context context, InterstitialAd interstitialAd) {
         this.context = context;
-        mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        this.mInterstitialAd = interstitialAd;
     }
 
     @Override
@@ -69,7 +67,7 @@ public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(final String result) {
-        ((com.udacity.gradle.builditbigger.MainActivity)context).stopProgressBar();
+        ((com.udacity.gradle.builditbigger.MainActivity) context).stopProgressBar();
         if (context != null) {
             mInterstitialAd.setAdListener(new AdListener() {
                 @Override

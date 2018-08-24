@@ -1,0 +1,25 @@
+objc[13850]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java (0x10cefd4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10cfc54e0). One of the two will be used. Which one is undefined.
+Warning: Google App Engine Java 7 runtime is deprecated.
+Warning: See https://cloud.google.com/appengine/docs/deprecations/java7
+Aug 24, 2018 8:41:42 AM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
+INFO: Overwriting system property key 'java.util.logging.config.file', value '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/config/sdk/logging.properties' with value 'WEB-INF/logging.properties' from '/Users/vortana_say/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend/WEB-INF/appengine-web.xml'
+Aug 24, 2018 8:41:42 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Logging to JettyLogger(null) via com.google.apphosting.utils.jetty.JettyLogger
+Aug 24, 2018 8:41:43 AM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
+WARNING: Your working directory, (/Users/vortana_say/AndroidStudioProjects/BuildItBigger) is not equal to your 
+web application root (/Users/vortana_say/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend)
+You will not be able to access files from your working directory on the production server.
+
+Aug 24, 2018 8:41:43 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: jetty-6.1.x
+Aug 24, 2018 8:41:45 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Started SelectChannelConnector@localhost:8080
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: Module instance default is running at http://localhost:8080/
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: The admin console is running at http://localhost:8080/_ah/admin
+Aug 24, 2018 8:41:45 AM com.google.appengine.tools.development.DevAppServerImpl doStart
+INFO: Dev App Server is now running
+Aug 24, 2018 8:42:57 AM com.google.appengine.tools.development.AbstractModule shutdown
+Shutting down.
+INFO: Shutting down module instance default

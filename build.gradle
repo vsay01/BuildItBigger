@@ -20,3 +20,32 @@ allprojects {
         google()
     }
 }
+
+/*
+* Gradle Task tie all together
+* 1. Launches the GCE local development server
+* 2. Runs all tests
+* 3. Shuts the server down again
+* */
+task runAppEngineStart(dependsOn: ":backend:appengineStart"){
+    println 'runAppEngineStart'
+}
+
+task runAndroidTest(dependsOn: ":app:connectedAndroidTest"){
+    println 'runAndroidTest'
+}
+
+task runAppEngineStop(dependsOn: ":backend:appengineStop"){
+    println 'runAppEngineStop'
+}
+
+runAndroidTest.mustRunAfter(runAppEngineStart)
+runAppEngineStop.mustRunAfter(runAndroidTest)
+
+task androidTestTask(dependsOn: [runAppEngineStart,
+                                 runAndroidTest,
+                                 runAppEngineStop]) {
+    doLast {
+        println 'androidTestTask completed'
+    }
+}

@@ -3,11 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -16,26 +12,12 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-import app.udacity.jokeactivity.MainActivity;
-
 public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
-    private InterstitialAd mInterstitialAd;
 
-    public JokesEndPointAsyncTask(Context context, InterstitialAd interstitialAd) {
+    public JokesEndPointAsyncTask(Context context) {
         this.context = context;
-        this.mInterstitialAd = interstitialAd;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
-        }
     }
 
     @Override
@@ -67,37 +49,11 @@ public class JokesEndPointAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(final String result) {
-        ((com.udacity.gradle.builditbigger.MainActivity) context).stopProgressBar();
         if (context != null) {
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    // Code to be executed when an ad finishes loading.
-                }
-
-                @Override
-                public void onAdFailedToLoad(int errorCode) {
-                    // Code to be executed when an ad request fails.
-                }
-
-                @Override
-                public void onAdOpened() {
-                    // Code to be executed when the ad is displayed.
-                }
-
-                @Override
-                public void onAdLeftApplication() {
-                    // Code to be executed when the user has left the app.
-                }
-
-                @Override
-                public void onAdClosed() {
-                    // Code to be executed when when the interstitial ad is closed.
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.putExtra("JOKE_EXTRA", result);
-                    context.startActivity(intent);
-                }
-            });
+            ((com.udacity.gradle.builditbigger.MainActivity) context).stopProgressBar();
+            Intent intent = new Intent(context, app.udacity.jokeactivity.MainActivity.class);
+            intent.putExtra("JOKE_EXTRA", result);
+            context.startActivity(intent);
         }
     }
 }

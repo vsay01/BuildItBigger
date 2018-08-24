@@ -1,21 +1,18 @@
 Warning: Google App Engine Java 7 runtime is deprecated.
 Warning: See https://cloud.google.com/appengine/docs/deprecations/java7
-Aug 23, 2018 6:54:45 PM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
-INFO: Overwriting system property key 'java.util.logging.config.file', value '/Users/u742670/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/config/sdk/logging.properties' with value 'WEB-INF/logging.properties' from '/Users/u742670/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend/WEB-INF/appengine-web.xml'
-Aug 23, 2018 6:54:45 PM com.google.apphosting.utils.jetty.JettyLogger info
-INFO: Logging to JettyLogger(null) via com.google.apphosting.utils.jetty.JettyLogger
-Aug 23, 2018 11:54:45 PM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
-WARNING: Your working directory, (/Users/u742670/AndroidStudioProjects/BuildItBigger/backend) is not equal to your 
-web application root (/Users/u742670/AndroidStudioProjects/BuildItBigger/backend/build/exploded-backend)
-You will not be able to access files from your working directory on the production server.
-
-Aug 23, 2018 11:54:45 PM com.google.apphosting.utils.jetty.JettyLogger info
-INFO: jetty-6.1.x
-Aug 23, 2018 11:54:46 PM com.google.apphosting.utils.jetty.JettyLogger info
-INFO: Started SelectChannelConnector@localhost:8080
-Aug 23, 2018 11:54:46 PM com.google.appengine.tools.development.AbstractModule startup
-INFO: Module instance default is running at http://localhost:8080/
-Aug 23, 2018 11:54:46 PM com.google.appengine.tools.development.AbstractModule startup
-INFO: The admin console is running at http://localhost:8080/_ah/admin
-Aug 23, 2018 6:54:46 PM com.google.appengine.tools.development.DevAppServerImpl doStart
-INFO: Dev App Server is now running
+java.lang.RuntimeException: Unable to create a DevAppServer
+	at com.google.appengine.tools.development.DevAppServerFactory.doCreateDevAppServer(DevAppServerFactory.java:401)
+	at com.google.appengine.tools.development.DevAppServerFactory.access$000(DevAppServerFactory.java:31)
+	at com.google.appengine.tools.development.DevAppServerFactory$1.run(DevAppServerFactory.java:318)
+	at com.google.appengine.tools.development.DevAppServerFactory$1.run(DevAppServerFactory.java:315)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.google.appengine.tools.development.DevAppServerFactory.createDevAppServer(DevAppServerFactory.java:314)
+	at com.google.appengine.tools.development.DevAppServerMain$StartAction.apply(DevAppServerMain.java:374)
+	at com.google.appengine.tools.util.Parser$ParseResult.applyArgs(Parser.java:45)
+	at com.google.appengine.tools.development.DevAppServerMain.run(DevAppServerMain.java:247)
+	at com.google.appengine.tools.development.DevAppServerMain.main(DevAppServerMain.java:238)
+Caused by: java.lang.ClassCastException: ClassLoader is jdk.internal.loader.ClassLoaders$AppClassLoader@4459eb14, not a URLClassLoader.
+	at com.google.apphosting.utils.security.SecurityManagerInstaller.generatePolicyFile(SecurityManagerInstaller.java:139)
+	at com.google.apphosting.utils.security.SecurityManagerInstaller.install(SecurityManagerInstaller.java:94)
+	at com.google.appengine.tools.development.DevAppServerFactory.doCreateDevAppServer(DevAppServerFactory.java:377)
+	... 9 more
